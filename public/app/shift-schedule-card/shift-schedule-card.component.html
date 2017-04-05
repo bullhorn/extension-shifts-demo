@@ -1,0 +1,25 @@
+<novo-card [title]="'Shift Schedule'" icon="activity">
+    <template #jobTemplate let-day="day" let-locale="locale" let-accepted="accepted" let-maybes="maybes" let-eventClicked="eventClicked">
+        <div class="calendar-day-top">
+            <span class="calendar-day-badge" *ngIf="accepted.length">{{ accepted.length }}</span>
+            <span class="calendar-day-number">{{ day.date | dayofmonth:locale }}</span>
+        </div>
+        <div class="calendar-events">
+            <div
+              class="calendar-event"
+              *ngFor="let event of maybes"
+              [style.backgroundColor]="event.color.primary"
+              [ngClass]="event?.cssClass"
+              (click)="$event.stopPropagation(); eventClicked.emit({event:event})">
+            </div>
+        </div>
+    </template>
+
+    <novo-calendar-month
+      [viewDate]="viewDate"
+      [events]="events"
+      [cellTemplate]="jobTemplate"
+      (dayClicked)="addShift($event)"
+      (eventClicked)="removeShift($event)">
+    </novo-calendar-month>
+</novo-card>

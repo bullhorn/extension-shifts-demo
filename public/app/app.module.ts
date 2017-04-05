@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
+import { NovoElementsModule } from 'novo-elements';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     FormsModule,
     HttpModule,
+    // VENDOR
+    NovoElementsModule,
     // APP
     AppRoutingModule,
     SharedModule
