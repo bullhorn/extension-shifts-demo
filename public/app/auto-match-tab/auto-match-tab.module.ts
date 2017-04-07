@@ -6,10 +6,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { NovoElementsModule } from 'novo-elements';
 // APP
 import { SharedModule } from '../shared/shared.module';
-import { ShiftScheduleCardComponent } from './shift-schedule-card.component';
+import { AutoMatchTabComponent } from './auto-match-tab.component';
 
 export const routes: Routes = [
-  { path: '', component: ShiftScheduleCardComponent, pathMatch: 'full' }
+  { path: '', component: AutoMatchTabComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -21,7 +21,7 @@ export const routes: Routes = [
     SharedModule
   ],
   declarations: [
-    ShiftScheduleCardComponent
+    AutoMatchTabComponent
   ]
 })
-export class ShiftScheduleCardModule { }
+export class AutoMatchTabModule { }

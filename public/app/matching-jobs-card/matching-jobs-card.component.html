@@ -1,0 +1,18 @@
+<novo-list direction="vertical">
+    <novo-list-item *ngFor="let item of jobs">
+        <item-header>
+            <item-avatar [icon]="'job'"></item-avatar>
+            <item-title><a (click)="openJobOrder(item)">{{item.title}}</a></item-title>
+        </item-header>
+        <item-content direction="vertical">
+            <p>
+                <i class="bhi-company"></i>
+                {{item.company}}
+            </p>
+            <span>
+                <i class="bhi-location"></i>
+                {{item.location}}
+            </span>
+        </item-content>
+    </novo-list-item>
+</novo-list>

@@ -2,9 +2,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-// APP
-import { AvailabilityCardComponent } from './availability-card.component';
+// Vendor
 import { NovoElementsModule } from 'novo-elements';
+// APP
+import { SharedModule } from '../shared/shared.module';
+import { AvailabilityCardComponent } from './availability-card.component';
 
 export const routes: Routes = [
   { path: '', component: AvailabilityCardComponent, pathMatch: 'full' }
@@ -15,7 +17,8 @@ export const routes: Routes = [
     // NG2
     CommonModule,
     RouterModule.forChild(routes),
-    NovoElementsModule
+    NovoElementsModule,
+    SharedModule
   ],
   declarations: [
     AvailabilityCardComponent

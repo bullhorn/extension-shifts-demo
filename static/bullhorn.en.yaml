@@ -1,0 +1,71 @@
+name: Shift Scheduling
+host: http://localhost:3000
+documentation: http://localhost:3000/docs
+readme: http://localhost:3000/readme.md
+
+requirements:
+  - "BH2017"
+
+# Form Triggers
+triggers:
+  candidate:
+    - type: Edit
+      url: http://localhost:3000/crazy-validator-one
+    - type: Add
+      url: http://localhost:3000/crazy-validator-two
+
+# Field Interactions
+scripts:
+  candidate:
+    - field: status
+      url: http://localhost:3000/status.js
+
+# Cards
+cards:
+  candidate:
+    - name: Availability
+      url: http://localhost:3000/availability
+      location: 0
+    - name: Quick Match
+      url: http://localhost:3000/matching-jobs
+      location: 0
+  joborder:
+    - name: Shifts Needed
+      url: http://localhost:3000/shifts
+      location: 0
+    - name: Quick Match
+      url: http://localhost:3000/matching-candidates
+      location: 0
+      #enabled: false
+
+# Tabs
+tabs:
+  candidate:
+    - name: Quick Match
+      url: http://localhost:3000/automatch
+
+# Workflows
+workflow:
+  candidate:
+    - name: Shifts Needed
+      url: http://localhost:3000/shiftneeds
+
+# Menu Actions
+# actions:
+#   candidate:
+#     - name: Quick Match
+#       url: http://localhost:3000/automatch
+#       location: 2
+
+# Pages
+# pages:
+#   - name: Quick Match
+#     url: http://localhost:3000/automatch
+#     hook: quick-match  
+
+# before_install:
+#   - lets_validate_somehow
+
+# after_install:
+#   - send_notification
+

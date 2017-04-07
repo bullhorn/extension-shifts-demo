@@ -4,6 +4,7 @@ const http = require('http');
 
 const app = express();
 app.use(express.static(path.resolve('dist')));
+app.use(express.static(path.resolve('static')));
 
 app.set('views', path.resolve('dist'));
 app.set('view engine', 'ejs');

@@ -1,0 +1,27 @@
+<header>
+    <novo-nav theme="color" [outlet]="navigator" direction="horizontal">
+        <novo-tab>
+            <span><i class="bhi-person"></i>Matches</span>
+        </novo-tab>
+        <novo-tab>
+            <span><i class="bhi-star-o-circle"></i>Interested</span>
+        </novo-tab>
+        <novo-tab>
+            <span><i class="bhi-star-circle"></i>Confirmed</span>
+        </novo-tab>
+    </novo-nav>
+</header>
+
+<novo-nav-outlet #navigator>
+    <novo-nav-content>
+        <h1>List of Notified</h1>
+        <h1>List of AutoMatch</h1>
+    </novo-nav-content>
+    <novo-nav-content>
+        <h1>List of Interested</h1>
+        <h1>List of Rejected</h1>
+    </novo-nav-content>
+    <novo-nav-content>
+        <h1>List of Confirmed</h1>
+    </novo-nav-content>
+</novo-nav-outlet>

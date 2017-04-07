@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+// Vendor
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { CalendarEvent, CalendarEventResponse } from 'novo-elements';
+// App
 import { colors, getNewEvent } from '../shared/utils/utils';
+import { ShiftsService } from '../shared/services/shifts/shifts.service';
 
 @Component({
   selector: 'app-availability-card',
@@ -8,29 +11,23 @@ import { colors, getNewEvent } from '../shared/utils/utils';
   styleUrls: ['./availability-card.component.scss']
 })
 export class AvailabilityCardComponent implements OnInit {
+    refresher: EventEmitter<any> = new EventEmitter();
     viewDate: Date = new Date();
-    events: CalendarEvent[] = [{
-        title: 'Has custom class',
-        color: colors.red,
-        start: new Date(),
-        response: CalendarEventResponse.Rejected
-    }];
+    events: CalendarEvent[] = [];
 
-    constructor() { }
+    constructor(private shifts: ShiftsService) {}
 
     ngOnInit() {
-    }
-
-    dayClicked(event) {
-        const evt: CalendarEvent = getNewEvent( event.day.date, colors.blue, CalendarEventResponse.Maybe );
-        event.day.events.push(evt);
+        this.shifts.getCandidateAvailability().then((events: CalendarEvent[]) => {
+            this.events = events;
+        });
     }
 
     toggleAvailable(event) {
         let evt: CalendarEvent;
         if (!event.day.events.length) {
             evt = getNewEvent( event.day.date, colors.green, CalendarEventResponse.Accepted);
-            event.day.events.push(evt);
+            this.events.push(evt);
         } else {
             evt = event.day.events[0];
             switch (evt.response) {
@@ -38,12 +35,13 @@ export class AvailabilityCardComponent implements OnInit {
                     evt.response = CalendarEventResponse.Rejected;
                     break;
                 case CalendarEventResponse.Rejected:
-                    event.day.events = [];
+                    this.events.splice(this.events.indexOf(evt), 1);
                     break;
                 default:
                     break;
             }
         }
+        this.refresher.emit(evt);
     }
 
 }
