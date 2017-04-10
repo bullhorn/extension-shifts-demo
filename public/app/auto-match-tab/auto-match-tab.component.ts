@@ -78,7 +78,6 @@ export class AutoMatchTabComponent implements OnInit {
       record.status = 'Notified';
       this.notified.rows.addItem(record);
       this.matched.rows.removeItem(record);
-      this.matched.rows.refresh();
     }
   }
 
@@ -87,7 +86,6 @@ export class AutoMatchTabComponent implements OnInit {
       record.status = 'Interested';
       this.interested.rows.addItem(record);
       this.notified.rows.removeItem(record);
-      this.notified.rows.refresh();
     }
   }
 
@@ -96,7 +94,6 @@ export class AutoMatchTabComponent implements OnInit {
       record.status = 'Confirmed';
       this.confirmed.rows.addItem(record);
       this.interested.rows.removeItem(record);
-      this.interested.rows.refresh();
     }
   }
 
@@ -105,7 +102,6 @@ export class AutoMatchTabComponent implements OnInit {
       record.status = 'Rejected';
       this.rejected.rows.addItem(record);
       this.interested.rows.removeItem(record);
-      this.interested.rows.refresh();
     }
   }
 
