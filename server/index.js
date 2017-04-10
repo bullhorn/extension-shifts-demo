@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const http = require('http');
+const middleware = require('./middleware/index');
 
 const app = express();
 app.use(express.static(path.resolve('dist')));
@@ -9,6 +10,9 @@ app.use(express.static(path.resolve('static')));
 app.set('views', path.resolve('dist'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
+
+// Internal middleware
+app.use(middleware());
 
 // Catch all other routes and return the index file
 app.get('*', (req, res, next) => {
