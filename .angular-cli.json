@@ -26,7 +26,9 @@
          "../node_modules/novo-elements"
        ]
     },
-    "scripts": [],
+    "scripts": [
+        "../node_modules/post-robot/dist/post-robot.min.js"
+    ],
     "environmentSource": "environments/environment.ts",
     "environments": {
       "dev": "environments/environment.ts",

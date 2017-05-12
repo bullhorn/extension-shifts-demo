@@ -7,6 +7,7 @@ import { NovoElementsModule } from 'novo-elements';
 // APP
 import { SharedModule } from '../shared/shared.module';
 import { AutoMatchTabComponent } from './auto-match-tab.component';
+import { AutoMatchTabService } from './auto-match-tab.service';
 
 export const routes: Routes = [
   { path: '', component: AutoMatchTabComponent, pathMatch: 'full' }
@@ -22,6 +23,9 @@ export const routes: Routes = [
   ],
   declarations: [
     AutoMatchTabComponent
+  ],
+  providers: [
+    AutoMatchTabService
   ]
 })
 export class AutoMatchTabModule { }

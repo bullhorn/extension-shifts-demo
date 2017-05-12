@@ -50,5 +50,19 @@ module.exports = function routes() {
         });
     });
 
+    // Callbacks for workflow item
+
+    // Interested Email
+    middleware.get(['/workflow/interested'], (request, response) => {
+        // TODO: Implement this
+        response.header('Access-Control-Allow-Origin', request.get('origin'));
+        response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        response.header('Access-Control-Allow-Credentials', 'true');
+        response.send({
+            total: 1,
+            route: ['./activity', { section: 'tasks' }]
+        });
+    });
+    
     return middleware;
 };

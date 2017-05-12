@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CalendarEvent, CalendarEventResponse } from 'novo-elements';
+import { URLSearchParams } from '@angular/http';
+import { AppBridge, CalendarEvent, CalendarEventResponse } from 'novo-elements';
 
 @Injectable()
 export class ShiftsService {
-
+  private bridge: AppBridge = new AppBridge('Shifts');
   constructor() { }
 
   getCandidateAvailability(): Promise<CalendarEvent[]> {
@@ -15,20 +16,17 @@ export class ShiftsService {
         date1: date  // date of event,
         candidate: ?
         */
-        /*
       // Don't forget to set a date range.
-
+      const params: any = new URLSearchParams(window.location.search);
+      console.log('searching', params);
       Promise.all([
-          AppBridge
-            .httpGET(`/query/PersonCustomObjectInstance1?fields=text1,text2,date1&where=candidate.id=${entityId}`),
-          AppBridge
-            .httpGET(`/query/JobSubmission?fields=dateBegin&where=candidate.id=${entityId}`),
-          AppBridge
-            .httpGET(`/query/Placement?fields=dateBegin&where=candidate.id=${entityId}`)
-        ]).then([events,submission,placements] => {
+          this.bridge.httpGET(`/query/PersonCustomObjectInstance1?fields=text1,text2,date1&where=candidate.id=${params.EntityId}`),
+          this.bridge.httpGET(`/query/JobSubmission?fields=dateBegin&where=candidate.id=${params.EntityId}`),
+          this.bridge.httpGET(`/query/Placement?fields=dateBegin&where=candidate.id=${params.EntityId}`)
+        ]).then(([events, submission, placements]) => {
             // Update Events to show Placements against it
+            console.log('results', events, submission, placements);
         });
-      */
       return Promise.resolve([]);
   }
 

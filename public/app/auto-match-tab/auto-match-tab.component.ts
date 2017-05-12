@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PagedArrayCollection } from 'novo-elements';
 import { TableData } from './auto-match-tab.data';
+import { AutoMatchTabService } from './auto-match-tab.service';
 
 interface TableConfig {
   columns: Array<any>;
@@ -18,7 +19,6 @@ export class AutoMatchTabComponent implements OnInit {
   interested: TableConfig;
   rejected: TableConfig;
   confirmed: TableConfig;
-
   config: any = {
     paging: {
       current: 1,
@@ -32,12 +32,16 @@ export class AutoMatchTabComponent implements OnInit {
     rowSelectionStyle: 'checkbox'
   };
 
-  constructor() { }
+  constructor(private service: AutoMatchTabService){}
 
   ngOnInit() {
+    this.service.getMatches().then((deets) => {
+      console.log('got deets', deets);
+    });
     const columns = [
       { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
-      { title: 'Position', name: 'position', ordering: true, filtering: true },
+      { title: 'Position', name: 'occupation', ordering: true, filtering: true },
+      { title: 'Hourly Rate', name: 'hourlyRate', ordering: true, filtering: true },
       {
         title: 'Status',
         name: 'status',

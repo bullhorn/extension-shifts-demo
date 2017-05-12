@@ -103,6 +103,8 @@ customObjects:
         - Rejected
       - name: date1
         label: DateOfEvent
+
+    ## FIELD MAPS??
   
 
 # before_install:
