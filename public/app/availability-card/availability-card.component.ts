@@ -3,7 +3,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { CalendarEvent, CalendarEventResponse } from 'novo-elements';
 // App
 import { colors, getNewEvent } from '../shared/utils/utils';
-import { ShiftsService } from '../shared/services/shifts/shifts.service';
+import { AvailabilityCardService } from './availability-card.service';
 
 @Component({
   selector: 'app-availability-card',
@@ -15,10 +15,11 @@ export class AvailabilityCardComponent implements OnInit {
     viewDate: Date = new Date();
     events: CalendarEvent[] = [];
 
-    constructor(private shifts: ShiftsService) {}
+    constructor(private availability: AvailabilityCardService) {}
 
     ngOnInit() {
-        this.shifts.getCandidateAvailability().then((events: CalendarEvent[]) => {
+        this.availability.getCandidateAvailability().subscribe((events: CalendarEvent[]) => {
+            console.log('events', events);
             this.events = events;
         });
     }
@@ -28,14 +29,17 @@ export class AvailabilityCardComponent implements OnInit {
         if (!event.day.events.length) {
             evt = getNewEvent( event.day.date, colors.green, CalendarEventResponse.Accepted);
             this.events.push(evt);
+            this.availability.add(evt);
         } else {
             evt = event.day.events[0];
             switch (evt.response) {
                 case CalendarEventResponse.Accepted:
                     evt.response = CalendarEventResponse.Rejected;
+                    this.availability.update(evt);
                     break;
                 case CalendarEventResponse.Rejected:
                     this.events.splice(this.events.indexOf(evt), 1);
+                    this.availability.remove(evt);
                     break;
                 default:
                     break;

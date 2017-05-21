@@ -1,50 +1,52 @@
-<header>
-    <novo-nav theme="color" [outlet]="navigator" direction="horizontal">
-        <novo-tab>
-            <span><i class="bhi-person"></i>Matches</span>
-        </novo-tab>
-        <novo-tab>
-            <span><i class="bhi-send"></i>Notified</span>
-        </novo-tab>
-        <novo-tab>
-            <span><i class="bhi-star-o-circle"></i>Interested</span>
-        </novo-tab>
-        <novo-tab>
-            <span><i class="bhi-star-circle"></i>Confirmed</span>
-        </novo-tab>
-    </novo-nav>
-</header>
-
-<novo-nav-outlet #navigator>
-    <novo-nav-content>
-        <h5>List of Matched</h5>
-        <novo-table [dataProvider]="matched.rows" [columns]="matched.columns" [config]="config" #matches>
-            <novo-table-actions>
-                <button theme="secondary" (click)="notify(matches.selected)">Notify</button>
-            </novo-table-actions>
-        </novo-table>
-    </novo-nav-content>
-    <novo-nav-content>
-        <h5>List of Notified</h5>
-        <novo-table [dataProvider]="notified.rows" [columns]="notified.columns" [config]="config" #messaged>
-            <novo-table-actions>
-                <button theme="secondary" (click)="remind(messaged.selected)">Reminder</button>
-            </novo-table-actions>
-        </novo-table>
-    </novo-nav-content>
-    <novo-nav-content>
-        <h5>List of Interested</h5>
-        <novo-table [dataProvider]="interested.rows" [columns]="interested.columns" [config]="config" #interests>
-            <novo-table-actions>
-                <button theme="negative" (click)="reject(interests.selected)">Reject</button>
-                <button theme="secondary" (click)="confirm(interests.selected)">Confirm</button>
-            </novo-table-actions>
-        </novo-table>
-        <h5>List of Rejected</h5>
-        <novo-table [dataProvider]="rejected.rows" [columns]="rejected.columns" [config]="config"></novo-table>
-    </novo-nav-content>
-    <novo-nav-content>
-        <h5>List of Confirmed</h5>
-        <novo-table [dataProvider]="confirmed.rows" [columns]="confirmed.columns" [config]="config"></novo-table>
-    </novo-nav-content>
-</novo-nav-outlet>
+<!--Results-->
+<section class="results">
+    <div class="result-card" data-automation-id="Notified">
+        <header class="candidate entity-header">
+            <div class="header-row" data-automation-id="notified-header">
+                <i class="icon bhi-outbound-email"></i> <span>Notified</span>
+            </div>
+        </header>
+        <section>
+            <novo-table [dataProvider]="notified.rows" [columns]="notified.columns" [config]="config" #messaged>
+                <novo-table-actions *ngIf="messaged.selected.length">
+                    <button theme="dialogue" icon="bell" (click)="remind(messaged.selected)">Reminder</button>
+                </novo-table-actions>
+            </novo-table>
+        </section>
+    </div>
+    <div class="result-card" data-automation-id="Interested">
+        <header class="candidate entity-header">
+            <div class="header-row" data-automation-id="notified-header">
+                <i class="icon bhi-candidate"></i> <span>Interested</span>
+            </div>
+        </header>
+        <section>
+            <novo-table [dataProvider]="interested.rows" [columns]="interested.columns" [config]="config" #interests>
+                <novo-table-actions *ngIf="interests.selected.length">
+                    <button theme="dialogue" color="negative" icon="delete-o" (click)="reject(interests.selected)">Reject</button>
+                    <button theme="dialogue" color="success" icon="check" (click)="confirm(interests.selected)">Confirm</button>
+                </novo-table-actions>
+            </novo-table>
+        </section>
+    </div>
+    <div class="result-card" data-automation-id="Confirmed">
+        <header class="candidate entity-header">
+            <div class="header-row" data-automation-id="notified-header">
+                <i class="icon bhi-star-circle"></i> <span>Confirmed</span>
+            </div>
+        </header>
+        <section>
+            <novo-table [dataProvider]="confirmed.rows" [columns]="confirmed.columns" [config]="readOnlyConfig"></novo-table>
+        </section>
+    </div>
+    <div class="result-card" data-automation-id="Rejected">
+        <header class="job entity-header">
+            <div class="header-row" data-automation-id="notified-header">
+                <i class="icon bhi-delete-o"></i> <span>Rejected</span>
+            </div>
+        </header>
+        <section>
+            <novo-table [dataProvider]="rejected.rows" [columns]="rejected.columns" [config]="readOnlyConfig"></novo-table>
+        </section>
+    </div>
+</section>

@@ -2,16 +2,27 @@
     <novo-list-item *ngFor="let item of candidates">
         <item-header>
             <item-avatar [icon]="'candidate'"></item-avatar>
-            <item-title><a (click)="openCandidate(item)">{{item.firstName}} {{item.lastName}}</a></item-title>
+            <item-title><a (click)="openCandidate(item)">{{item.person.firstName}} {{item.person.lastName}}</a></item-title>
+            <item-header-end>
+                <span>
+                    <i class="bhi-calendar"></i>
+                    {{item.dateAvailable | date}}
+                </span>
+            </item-header-end>
         </item-header>
-        <item-content direction="vertical">
-            <p>
-                <i class="bhi-company"></i>
-                {{item.company}}
-            </p>
+        <item-content direction="horizontal">
             <span>
-                <i class="bhi-location"></i>
-                {{item.location}}
+                <div>
+                    <i class="bhi-job"></i>
+                    {{item.person.occupation}}
+                </div>
+                <div>
+                    <i class="bhi-location"></i>
+                    {{item.person.address?.city}}
+                </div>
+            </span>
+            <span>
+                <button theme="primary" icon="outbound-email" (click)="notify(item)">notify</button>
             </span>
         </item-content>
     </novo-list-item>

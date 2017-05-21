@@ -3,14 +3,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 // Vendor
-import { NovoElementsModule } from 'novo-elements';
+import { NovoElementsModule, AppBridge } from 'novo-elements';
 // APP
-import { SharedModule } from '../shared/shared.module';
 import { MatchingJobsCardComponent } from './matching-jobs-card.component';
+import { MatchingJobsCardService } from './matching-jobs-card.service';
+import { SharedModule } from '../shared/shared.module';
 
 export const routes: Routes = [
   { path: '', component: MatchingJobsCardComponent, pathMatch: 'full' }
 ];
+
+const bridge = new AppBridge('MatchingJobs');
+bridge.tracing = true;
+bridge.register();
 
 @NgModule({
   imports: [
@@ -22,6 +27,10 @@ export const routes: Routes = [
   ],
   declarations: [
     MatchingJobsCardComponent
+  ],
+  providers: [
+    MatchingJobsCardService,
+    { provide: AppBridge, useValue: bridge }
   ]
 })
 export class MatchingJobsCardModule { }

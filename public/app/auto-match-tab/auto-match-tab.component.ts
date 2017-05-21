@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PagedArrayCollection } from 'novo-elements';
-import { TableData } from './auto-match-tab.data';
+import { PagedArrayCollection, DateCell } from 'novo-elements';
 import { AutoMatchTabService } from './auto-match-tab.service';
 
 interface TableConfig {
@@ -14,7 +13,7 @@ interface TableConfig {
   styleUrls: ['./auto-match-tab.component.scss']
 })
 export class AutoMatchTabComponent implements OnInit {
-  matched: TableConfig;
+  // matched: TableConfig;
   notified: TableConfig;
   interested: TableConfig;
   rejected: TableConfig;
@@ -31,30 +30,35 @@ export class AutoMatchTabComponent implements OnInit {
     selectAllEnabled: true,
     rowSelectionStyle: 'checkbox'
   };
+  readOnlyConfig: any = {
+    paging: {
+      current: 1,
+      itemsPerPage: 10
+    },
+    sorting: true,
+    filtering: true,
+    ordering: true,
+    resizing: true
+  };
 
   constructor(private service: AutoMatchTabService){}
 
   ngOnInit() {
-    this.service.getMatches().then((deets) => {
-      console.log('got deets', deets);
-    });
     const columns = [
       { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
       { title: 'Position', name: 'occupation', ordering: true, filtering: true },
-      { title: 'Hourly Rate', name: 'hourlyRate', ordering: true, filtering: true },
+      { title: 'Hourly Rate', name: 'payRate', ordering: true, filtering: true, renderer: (object) => `$ ${Number(object.payRate).toFixed(2)}` },
       {
-        title: 'Status',
-        name: 'status',
-        options: ['New Lead', 'Active', 'Archived'],
+        title: 'Shift Date',
+        name: 'shiftDate',
+        type: 'date',
+        renderer: DateCell,
         ordering: true,
-        multiple: true,
-        filtering: true
+        filtering: true,
+        range: true
       }
     ];
-    this.matched = {
-      columns: columns.slice(),
-      rows: new PagedArrayCollection<any>(TableData.slice())
-    };
+
     this.notified = {
       columns: columns.slice(),
       rows: new PagedArrayCollection<any>()
@@ -71,19 +75,33 @@ export class AutoMatchTabComponent implements OnInit {
       columns: columns.slice(),
       rows: new PagedArrayCollection<any>()
     };
+
+    this.service.getNotified().subscribe((evt) => {
+      this.notified.rows = new PagedArrayCollection<any>(evt);
+    });
+    this.service.getInterested().subscribe((evt) => {
+      this.interested.rows = new PagedArrayCollection<any>(evt);
+    });
+    this.service.getRejected().subscribe((evt) => {
+      this.rejected.rows = new PagedArrayCollection<any>(evt);
+    });
+    this.service.getConfirmed().subscribe((evt) => {
+      this.confirmed.rows = new PagedArrayCollection<any>(evt);
+    });
   }
 
   singleAction() {
     window.alert('HI!');
   }
 
-  notify(selected) {
-    for (const record of selected) {
-      record.status = 'Notified';
-      this.notified.rows.addItem(record);
-      this.matched.rows.removeItem(record);
-    }
-  }
+  // notify(selected) {
+  //   for (const record of selected) {
+  //     record.status = 'Notified';
+  //     this.notified.rows.addItem(record);
+  //     // this.matched.rows.removeItem(record);
+  //     this.service.notify(selected);
+  //   }
+  // }
 
   remind(selected) {
     for (const record of selected) {
@@ -98,6 +116,7 @@ export class AutoMatchTabComponent implements OnInit {
       record.status = 'Confirmed';
       this.confirmed.rows.addItem(record);
       this.interested.rows.removeItem(record);
+      this.service.confirm(selected);
     }
   }
 
@@ -108,5 +127,4 @@ export class AutoMatchTabComponent implements OnInit {
       this.interested.rows.removeItem(record);
     }
   }
-
 }

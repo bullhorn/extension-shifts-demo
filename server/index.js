@@ -2,10 +2,13 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const middleware = require('./middleware/index');
+const bodyParser = require('body-parser')
 
 const app = express();
 app.use(express.static(path.resolve('dist')));
 app.use(express.static(path.resolve('static')));
+// parse application/json
+app.use(bodyParser.json());
 
 app.set('views', path.resolve('dist'));
 app.set('view engine', 'ejs');

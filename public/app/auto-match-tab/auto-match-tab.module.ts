@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 // Vendor
-import { NovoElementsModule } from 'novo-elements';
+import { NovoElementsModule, AppBridge } from 'novo-elements';
 // APP
 import { SharedModule } from '../shared/shared.module';
 import { AutoMatchTabComponent } from './auto-match-tab.component';
@@ -12,6 +12,10 @@ import { AutoMatchTabService } from './auto-match-tab.service';
 export const routes: Routes = [
   { path: '', component: AutoMatchTabComponent, pathMatch: 'full' }
 ];
+
+const bridge = new AppBridge('AutoMatchTab');
+bridge.tracing = true;
+bridge.register();
 
 @NgModule({
   imports: [
@@ -25,7 +29,8 @@ export const routes: Routes = [
     AutoMatchTabComponent
   ],
   providers: [
-    AutoMatchTabService
+    AutoMatchTabService,
+    { provide: AppBridge, useValue: bridge }
   ]
 })
 export class AutoMatchTabModule { }

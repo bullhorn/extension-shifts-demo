@@ -3,7 +3,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { CalendarEvent, CalendarEventResponse } from 'novo-elements';
 // App
 import { colors, getNewEvent } from '../shared/utils/utils';
-import { ShiftsService } from '../shared/services/shifts/shifts.service';
+import { ShiftScheduleCardService } from './shift-schedule-card.service';
 
 @Component({
   selector: 'app-shift-schedule-card',
@@ -15,10 +15,10 @@ export class ShiftScheduleCardComponent implements OnInit {
   viewDate: Date = new Date();
   events: CalendarEvent[] = [];
 
-  constructor(private shifts: ShiftsService) {}
+  constructor(private shifts: ShiftScheduleCardService) {}
 
     ngOnInit() {
-        this.shifts.getShiftNeeded().then((events: CalendarEvent[]) => {
+        this.shifts.getShiftsNeeded().subscribe((events: CalendarEvent[]) => {
             this.events = events;
         });
     }
@@ -26,12 +26,13 @@ export class ShiftScheduleCardComponent implements OnInit {
   addShift(event) {
       const evt: CalendarEvent = getNewEvent( event.day.date, colors.blue, CalendarEventResponse.Maybe);
       this.events.push(evt);
-      this.refresher.emit(evt);
+      this.shifts.add(evt);
   }
 
   removeShift(event) {
       this.events.splice(event.day.events.indexOf(event.event), 1);
-      this.refresher.emit(event.event);
+      this.shifts.remove(event.event);
+      // this.refresher.emit(event.event);
   }
 
   saveEvent() {

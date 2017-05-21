@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatchingCandidatesCardService } from './matching-candidates-card.service';
 
 @Component({
   selector: 'app-matching-candidates-card',
@@ -6,38 +7,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./matching-candidates-card.component.scss']
 })
 export class MatchingCandidatesCardComponent implements OnInit {
-
+  // refresher: EventEmitter<any> = new EventEmitter();
   candidates: Array<any> = [];
 
-  constructor() { }
+  constructor(private matches: MatchingCandidatesCardService) {}
 
   ngOnInit() {
-    this.candidates = [{
-      firstName: 'Steph',
-      lastName: 'Curry',
-      company: 'Wells Fargo',
-      location: 'Golden State, CA'
-    }, {
-      firstName: 'Lebron',
-      lastName: 'James',
-      company: 'Amazon',
-      location: 'Cleveland, OH'
-    }, {
-      firstName: 'Derrick',
-      lastName: 'Rose',
-      company: 'Walmart',
-      location: 'Chicago, IL'
-    }];
+    this.matches.getMatchingCandidates().subscribe((candidates: any[]) => {
+          console.log('candidates', candidates);
+          this.candidates = candidates;
+      });
+  }
+
+  notify(availabilty) {
+     this.matches.notify(availabilty);
   }
 
   openCandidate(candidate) {
       /*
       AppBridge.openRecord({
-          entityType: 'Candidate',
-          entityId: candidate.id
+          entityType: 'JobOrder',
+          entityId: job.id
       });
       */
   }
-
-
 }
