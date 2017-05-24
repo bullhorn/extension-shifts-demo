@@ -1,13 +1,14 @@
 name: Shift Scheduling
+description: The best app to integrate shift scheduling and availabilty tracking directly into Bullhorn!
 version: 1.0
 author: Bullhorn Superstars, llc
 homepage: http://localhost:3000/home
 support: http://localhost:3000/issues
 readme: http://localhost:3000/readme.md
-license: MIT  
-
-requirements:
-  - "BH2017"
+icon: https://placeholdit.imgix.net/~text?txtsize=12&txt=60x60&w=60&h=60
+license: MIT
+# For Client Specific Repos use corporation.id
+private: false
 
 keywords:
   - "Engage"
@@ -16,28 +17,24 @@ keywords:
 
 # Form Triggers
 triggers:
-  candidate:
-    - type: Edit
+  Candidate:
+    - name: Crazy Validation One
+      event: Edit
       url: http://localhost:3000/crazy-validator-one
-    - type: Add
+    - name: Crazy Validation Two
+      event: Add
       url: http://localhost:3000/crazy-validator-two
-
-# Field Interactions
-scripts:
-  candidate:
-    - field: status
-      url: http://localhost:3000/status.js
 
 # Cards
 cards:
-  candidate:
+  Candidate:
     - name: Availability
       url: http://localhost:3000/availability
       location: 0
     - name: Quick Match
       url: http://localhost:3000/matching-jobs
       location: 0
-  joborder:
+  JobOrder:
     - name: Shifts Needed
       url: http://localhost:3000/shifts
       location: 0
@@ -48,63 +45,76 @@ cards:
 
 # Tabs
 tabs:
-  candidate:
+  Candidate:
     - name: Quick Match
       url: http://localhost:3000/automatch
 
-# Workflows
-workflow:
-  candidate:
-    - name: Shifts Needed
-      url: http://localhost:3000/shiftneeds
-
 # Menu Actions
 # actions:
-#   candidate:
+#   Candidate:
 #     - name: Quick Match
 #       url: http://localhost:3000/automatch
 #       location: 2
 
 # Pages
 # pages:
-#   - name: Quick Match
+#   - name: WhiteBoard
 #     url: http://localhost:3000/automatch
 #     hook: quick-match  
 
 # Provisioning for Custom Objects
 customObjects:
-  candidate:
+  Candidate:
     - name: Availability
       number: 1
       fields:
-      - name: text1
+      - column: text1
+        name: text1
         label: name
-      - name: text3
+        type: Text
+      - column: text2
+        name: text2
         label: status
+        type: Text
         options:
         - Maybe
         - Accepted
         - Rejected
-      - name: date1
+      - column: date1
+        name: date1
         label: DateOfEvent
-  joborder:
+        type: Date
+  JobOrder:
     - name: Shifts
       number: 1
       fields:
-      - name: text1
+      - column: text1
+        name: text1
         label: name
-      - name: text2
-        label: type
-      - name: text3
+        type: Text
+      - column: text2
+        name: text2
         label: status
+        type: Text
         options:
         - Maybe
         - Accepted
         - Rejected
-      - name: date1
+      - column: date1
+        name: date1
         label: DateOfEvent
+        type: Date
 
-    ## FIELD MAPS??
+# FIELD MAPS
+fieldMaps:
+  JobSubmission:
+    - name: customText5
+      label: Date of Shift
+
+# Private Label Attributes
+privateLabelAttributes:
+  candidateWorkflowIcons: "+[Custom:Shifts Needed|//localhost:3000/shiftneeds]"
+
   
 
 # before_install:
@@ -112,4 +122,3 @@ customObjects:
 
 # after_install:
 #   - send_notification
-

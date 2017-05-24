@@ -13,9 +13,12 @@ export const routes: Routes = [
   { path: '', component: AutoMatchTabComponent, pathMatch: 'full' }
 ];
 
-const bridge = new AppBridge('AutoMatchTab');
-bridge.tracing = true;
-bridge.register();
+export function setupAppBridge() {
+    const bridge = new AppBridge('AutoMatchTab');
+    bridge.tracing = true;
+    bridge.register();
+    return bridge;
+}
 
 @NgModule({
   imports: [
@@ -30,7 +33,7 @@ bridge.register();
   ],
   providers: [
     AutoMatchTabService,
-    { provide: AppBridge, useValue: bridge }
+    { provide: AppBridge, useFactory: setupAppBridge }
   ]
 })
 export class AutoMatchTabModule { }

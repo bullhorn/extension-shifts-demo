@@ -90,10 +90,6 @@ export class AutoMatchTabComponent implements OnInit {
     });
   }
 
-  singleAction() {
-    window.alert('HI!');
-  }
-
   // notify(selected) {
   //   for (const record of selected) {
   //     record.status = 'Notified';
