@@ -8,9 +8,9 @@ describe('AutoMatchTabComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AutoMatchTabComponent ]
+      declarations: [AutoMatchTabComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

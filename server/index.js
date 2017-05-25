@@ -19,20 +19,20 @@ app.use(middleware());
 
 // Catch all other routes and return the index file
 app.get('*', (req, res, next) => {
-  // Check for session!
-  // Redirect if no session!
-  next();
+    // Check for session!
+    // Redirect if no session!
+    next();
 }, (req, res) => {
-  res.render('index.html', {
-    settings: {},
-    entitlements: {},
-    ulUrl: '',
-    ulLoginPage: '',
-    environment: 'development'
-  });
+    res.render('index.html', {
+        settings: {},
+        entitlements: {},
+        ulUrl: '',
+        ulLoginPage: '',
+        environment: 'development'
+    });
 });
 
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '3001';
 app.set('port', port);
 
 const server = http.createServer(app);

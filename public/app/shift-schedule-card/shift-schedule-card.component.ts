@@ -15,35 +15,35 @@ export class ShiftScheduleCardComponent implements OnInit {
   viewDate: Date = new Date();
   events: CalendarEvent[] = [];
 
-  constructor(private shifts: ShiftScheduleCardService) {}
+  constructor(private shifts: ShiftScheduleCardService) { }
 
-    ngOnInit() {
-        this.shifts.getShiftsNeeded().subscribe((events: CalendarEvent[]) => {
-            this.events = events;
-        });
-    }
+  ngOnInit() {
+    this.shifts.getShiftsNeeded().subscribe((events: CalendarEvent[]) => {
+      this.events = events;
+    });
+  }
 
   addShift(event) {
-      const evt: CalendarEvent = getNewEvent( event.day.date, colors.blue, CalendarEventResponse.Maybe);
-      this.events.push(evt);
-      this.shifts.add(evt);
+    const evt: CalendarEvent = getNewEvent(event.day.date, colors.blue, CalendarEventResponse.Maybe);
+    this.events.push(evt);
+    this.shifts.add(evt);
   }
 
   removeShift(event) {
-      this.events.splice(event.day.events.indexOf(event.event), 1);
-      this.shifts.remove(event.event);
-      // this.refresher.emit(event.event);
+    this.events.splice(event.day.events.indexOf(event.event), 1);
+    this.shifts.remove(event.event);
+    // this.refresher.emit(event.event);
   }
 
   saveEvent() {
-        // get http
-        // save to JobOrderCustomObjectInstance1 field.
-        /*Shift Needed
-        text1: name
-        text2: type
-        text3: status
-        date1: DateOfEvent
-        jobOrder: id
-        */
-    }
+    // get http
+    // save to JobOrderCustomObjectInstance1 field.
+    /*Shift Needed
+    text1: name
+    text2: type
+    text3: status
+    date1: DateOfEvent
+    jobOrder: id
+    */
+  }
 }

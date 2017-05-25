@@ -30,22 +30,22 @@ cards:
   Candidate:
     - name: Availability
       url: https://engage-shifts.appspot.com/availability
-      location: 0
+      location: 1
     - name: Quick Match
       url: https://engage-shifts.appspot.com/matching-jobs
-      location: 0
+      location: 1
   JobOrder:
     - name: Shifts Needed
       url: https://engage-shifts.appspot.com/shifts
-      location: 0
+      location: 1
     - name: Quick Match
       url: https://engage-shifts.appspot.com/matching-candidates
-      location: 0
+      location: 1
       #enabled: false
 
 # Tabs
 tabs:
-  Candidate:
+  JobOrder:
     - name: Quick Match
       url: https://engage-shifts.appspot.com/automatch
 
@@ -122,8 +122,6 @@ fieldMaps:
 # Private Label Attributes
 privateLabelAttributes:
   candidateWorkflowIcons: "+[Custom:Shifts Needed|//https://engage-shifts.appspot.com/shiftneeds]"
-
-
 
 # before_install:
 #   - lets_validate_somehow

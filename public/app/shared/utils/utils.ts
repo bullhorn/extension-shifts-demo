@@ -20,11 +20,11 @@ export const colors: any = {
 };
 
 export function getNewEvent(date, color, type): CalendarEvent {
-    const evt: CalendarEvent = {
-        title: 'Has custom class',
-        color: color,
-        start: date,
-        response: type
-    };
-    return evt;
+  const evt: CalendarEvent = {
+    title: 'Has custom class',
+    color: color,
+    start: date,
+    response: type
+  };
+  return evt;
 }

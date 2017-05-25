@@ -41,7 +41,7 @@ export class AutoMatchTabComponent implements OnInit {
     resizing: true
   };
 
-  constructor(private service: AutoMatchTabService){}
+  constructor(private service: AutoMatchTabService) { }
 
   ngOnInit() {
     const columns = [

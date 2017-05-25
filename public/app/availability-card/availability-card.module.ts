@@ -12,11 +12,12 @@ export const routes: Routes = [
   { path: '', component: AvailabilityCardComponent, pathMatch: 'full' }
 ];
 
+const bridge = new AppBridge('Availability');
+bridge.tracing = true;
+bridge.register();
+
 export function setupAppBridge() {
-    const bridge = new AppBridge('Availability');
-    bridge.tracing = true;
-    bridge.register();
-    return bridge;
+  return bridge;
 }
 
 @NgModule({

@@ -1,77 +1,75 @@
 @import "novo-elements";
-
 .results {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding:20px;
-
-    .result-card {
-        background-color: $white;
-        box-shadow: $whiteframe-shadow-z1;
-        margin-bottom: 20px;
-        novo-table>header {
-            min-height: 0;
-            padding: 0 15px;
-            box-shadow: 0;
-        }
-        >header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            min-height: 0;
-            font-size: 18px;
-            i {
-                margin-right: 10px;
-            }
-            &.entity-header {
-                box-sizing: border-box;
-                background: $white;
-                @each $entity,
-                $color in $entity-colors {
-                    &.#{$entity} {
-                        border-top: 3px solid $color;
-                    }
-                }
-            }
-            &:not(.entity-header) {
-                opacity: .6;
-            }
-            novo-pagination {
-                padding: 10px 5px;
-            }
-        }
-        .header-actions {
-            width: 100%;
-        }
-        .body {
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                border-spacing: 0;
-                empty-cells: show;
-                border: 1px solid #ddd;
-                th {
-                    border-left: 1px solid #ddd;
-                    border-width: 0 0 0 1px;
-                    &:first-child {
-                        border-left-width: 0;
-                    }
-                }
-                td,
-                th {
-                    padding: 15px 10px;
-                    text-align: left;
-                    &.icons {
-                        width: 60px;
-                        text-align: center;
-                    }
-                }
-            }
-        }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  .result-card {
+    background-color: $white;
+    box-shadow: $whiteframe-shadow-z1;
+    margin-bottom: 20px;
+    novo-table>header {
+      min-height: 0;
+      padding: 0 15px;
+      box-shadow: 0;
     }
-    &:last-child {
-        padding-bottom: 25px;
+    >header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      min-height: 0;
+      font-size: 18px;
+      i {
+        margin-right: 10px;
+      }
+      &.entity-header {
+        box-sizing: border-box;
+        background: $white;
+        @each $entity,
+        $color in $entity-colors {
+          &.#{$entity} {
+            border-top: 3px solid $color;
+          }
+        }
+      }
+      &:not(.entity-header) {
+        opacity: .6;
+      }
+      novo-pagination {
+        padding: 10px 5px;
+      }
     }
+    .header-actions {
+      width: 100%;
+    }
+    .body {
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        empty-cells: show;
+        border: 1px solid #ddd;
+        th {
+          border-left: 1px solid #ddd;
+          border-width: 0 0 0 1px;
+          &:first-child {
+            border-left-width: 0;
+          }
+        }
+        td,
+        th {
+          padding: 15px 10px;
+          text-align: left;
+          &.icons {
+            width: 60px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+  &:last-child {
+    padding-bottom: 25px;
+  }
 }

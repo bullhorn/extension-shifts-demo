@@ -1,29 +1,29 @@
 <novo-list direction="vertical">
-    <novo-list-item *ngFor="let item of candidates">
-        <item-header>
-            <item-avatar [icon]="'candidate'"></item-avatar>
-            <item-title><a (click)="openCandidate(item)">{{item.person.firstName}} {{item.person.lastName}}</a></item-title>
-            <item-header-end>
-                <span>
-                    <i class="bhi-calendar"></i>
-                    {{item.dateAvailable | date}}
-                </span>
-            </item-header-end>
-        </item-header>
-        <item-content direction="horizontal">
-            <span>
-                <div>
-                    <i class="bhi-job"></i>
-                    {{item.person.occupation}}
-                </div>
-                <div>
-                    <i class="bhi-location"></i>
-                    {{item.person.address?.city}}
-                </div>
-            </span>
-            <span>
-                <button theme="primary" icon="outbound-email" (click)="notify(item)">notify</button>
-            </span>
-        </item-content>
-    </novo-list-item>
+  <novo-list-item *ngFor="let item of candidates">
+    <item-header>
+      <item-avatar [icon]="'candidate'"></item-avatar>
+      <item-title><a (click)="openCandidate(item)">{{item.person.firstName}} {{item.person.lastName}}</a></item-title>
+      <item-header-end>
+        <span>
+          <i class="bhi-calendar"></i>
+          {{item.dateAvailable | date}}
+        </span>
+      </item-header-end>
+    </item-header>
+    <item-content direction="horizontal">
+      <span>
+        <div>
+            <i class="bhi-job"></i>
+            {{item.person.occupation}}
+        </div>
+        <div>
+            <i class="bhi-location"></i>
+            {{item.person.address?.city}}
+        </div>
+      </span>
+      <span>
+        <button theme="primary" icon="outbound-email" (click)="notify(item)">notify</button>
+      </span>
+    </item-content>
+  </novo-list-item>
 </novo-list>

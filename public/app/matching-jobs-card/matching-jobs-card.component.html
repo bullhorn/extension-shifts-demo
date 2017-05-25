@@ -1,29 +1,29 @@
 <novo-list direction="vertical">
-    <novo-list-item *ngFor="let item of jobs">
-        <item-header>
-            <item-avatar [icon]="'job'"></item-avatar>
-            <item-title><a (click)="openJobOrder(item)">{{item.jobOrder.title}}</a></item-title>
-            <item-header-end>
-                <span>
-                    <i class="bhi-calendar"></i>
-                    {{item.shiftDate | date}}
-                </span>
-            </item-header-end>
-        </item-header>
-        <item-content direction="horizontal">
-            <span>
-                <div>
-                    <i class="bhi-company"></i>
-                    {{item.jobOrder.clientCorporation?.name}}
-                </div>
-                <div>
-                     <i class="bhi-location"></i>
-                    {{item.jobOrder.address?.city}}, {{item.jobOrder.address?.state}}
-                </div>
-            </span>
-            <span>
-                <button theme="primary" icon="outbound-email" (click)="notify(item)">notify</button>
-            </span>
-        </item-content>
-    </novo-list-item>
+  <novo-list-item *ngFor="let item of jobs">
+    <item-header>
+      <item-avatar [icon]="'job'"></item-avatar>
+      <item-title><a (click)="openJobOrder(item)">{{item.jobOrder.title}}</a></item-title>
+      <item-header-end>
+        <span>
+          <i class="bhi-calendar"></i>
+          {{item.shiftDate | date}}
+        </span>
+      </item-header-end>
+    </item-header>
+    <item-content direction="horizontal">
+      <span>
+          <div>
+            <i class="bhi-company"></i>
+            {{item.jobOrder.clientCorporation?.name}}
+          </div>
+          <div>
+            <i class="bhi-location"></i>
+            {{item.jobOrder.address?.city}}, {{item.jobOrder.address?.state}}
+          </div>
+      </span>
+      <span>
+          <button theme="primary" icon="outbound-email" (click)="notify(item)">notify</button>
+      </span>
+    </item-content>
+  </novo-list-item>
 </novo-list>

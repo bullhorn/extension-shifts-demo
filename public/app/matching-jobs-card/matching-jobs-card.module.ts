@@ -13,11 +13,12 @@ export const routes: Routes = [
   { path: '', component: MatchingJobsCardComponent, pathMatch: 'full' }
 ];
 
+const bridge = new AppBridge('MatchingJobs');
+bridge.tracing = true;
+bridge.register();
+
 export function setupAppBridge() {
-    const bridge = new AppBridge('MatchingJobs');
-    bridge.tracing = true;
-    bridge.register();
-    return bridge;
+  return bridge;
 }
 
 @NgModule({

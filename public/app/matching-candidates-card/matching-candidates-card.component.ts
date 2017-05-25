@@ -1,3 +1,4 @@
+import { AppBridge } from 'novo-elements';
 import { Component, OnInit } from '@angular/core';
 import { MatchingCandidatesCardService } from './matching-candidates-card.service';
 
@@ -10,25 +11,24 @@ export class MatchingCandidatesCardComponent implements OnInit {
   // refresher: EventEmitter<any> = new EventEmitter();
   candidates: Array<any> = [];
 
-  constructor(private matches: MatchingCandidatesCardService) {}
+  constructor(private matches: MatchingCandidatesCardService, private bridge: AppBridge) { }
 
   ngOnInit() {
     this.matches.getMatchingCandidates().subscribe((candidates: any[]) => {
-          console.log('candidates', candidates);
-          this.candidates = candidates;
-      });
+      console.log('candidates', candidates);
+      this.candidates = candidates;
+    });
   }
 
   notify(availabilty) {
-     this.matches.notify(availabilty);
+    this.matches.notify(availabilty);
   }
 
-  openCandidate(candidate) {
-      /*
-      AppBridge.openRecord({
-          entityType: 'JobOrder',
-          entityId: job.id
-      });
-      */
+  openCandidate(data) {
+    this.bridge.open({
+      type: 'record',
+      entityType: 'Candidate',
+      entityId: data.person.id
+    });
   }
 }

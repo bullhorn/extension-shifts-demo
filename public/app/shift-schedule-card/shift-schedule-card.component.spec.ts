@@ -8,9 +8,9 @@ describe('ShiftScheduleCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShiftScheduleCardComponent ]
+      declarations: [ShiftScheduleCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
