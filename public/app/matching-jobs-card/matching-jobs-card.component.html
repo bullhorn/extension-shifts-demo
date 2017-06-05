@@ -26,4 +26,7 @@
       </span>
     </item-content>
   </novo-list-item>
+  <div classs="empty-state" *ngIf="jobs.length===0">
+    <i class="bhi-search-question"></i> No Matching Jobs, Add more Availibility
+  </div>
 </novo-list>
