@@ -22,3 +22,17 @@
         text-align: center;
     }
 }
+
+.empty-state {
+    color: #999;
+    margin: 40px 0;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+    i {
+        font-size: 2.4em;
+        padding: 20px;
+    }
+  }
