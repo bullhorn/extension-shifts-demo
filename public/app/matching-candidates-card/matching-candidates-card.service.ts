@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter, NgZone } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { URLSearchParams, Http } from '@angular/http';
 import { PagedArrayCollection, AppBridge, CalendarEvent, CalendarEventResponse } from 'novo-elements';
 import { colors } from '../shared/utils/utils';
@@ -14,12 +14,7 @@ interface Availability {
 export class MatchingCandidatesCardService {
   private subject: EventEmitter<Availability[]> = new EventEmitter();
 
-  constructor(private bridge: AppBridge, private shared: SharedService, private http: Http, private zone: NgZone) {
-    this.bridge.addEventListener('SHIFTS.CHANGED', () => {
-      this.zone.run(() => {
-        this.refresh();
-      });
-    });
+  constructor(private bridge: AppBridge, private shared: SharedService, private http: Http) {
   }
 
   getMatchingCandidates(): EventEmitter<any[]> {

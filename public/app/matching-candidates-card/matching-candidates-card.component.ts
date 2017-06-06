@@ -1,4 +1,4 @@
-import { AppBridge } from 'novo-elements';
+import { AppBridge, NgZone } from 'novo-elements';
 import { Component, OnInit } from '@angular/core';
 import { MatchingCandidatesCardService } from './matching-candidates-card.service';
 
@@ -11,12 +11,17 @@ export class MatchingCandidatesCardComponent implements OnInit {
   // refresher: EventEmitter<any> = new EventEmitter();
   candidates: Array<any> = [];
 
-  constructor(private matches: MatchingCandidatesCardService, private bridge: AppBridge) { }
+  constructor(private matches: MatchingCandidatesCardService, private bridge: AppBridge, private zone: NgZone) { }
 
   ngOnInit() {
     this.matches.getMatchingCandidates().subscribe((candidates: any[]) => {
       console.log('candidates', candidates);
       this.candidates = candidates;
+    });
+    this.bridge.addEventListener('SHIFTS.CHANGED', () => {
+      this.zone.run(() => {
+        this.matches.refresh();
+      });
     });
   }
 
