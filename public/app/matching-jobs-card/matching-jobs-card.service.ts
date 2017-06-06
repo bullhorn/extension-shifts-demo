@@ -14,7 +14,11 @@ interface Shift {
 export class MatchingJobsCardService {
   private subject: EventEmitter<Shift[]> = new EventEmitter();
 
-  constructor(private bridge: AppBridge, private shared: SharedService, private http: Http) { }
+  constructor(private bridge: AppBridge, private shared: SharedService, private http: Http) {
+    this.bridge.addEventListener('SHIFTS.CHANGED', () => {
+      this.refresh();
+    });
+  }
 
   getMatchingJobs(): EventEmitter<Shift[]> {
     this.refresh();

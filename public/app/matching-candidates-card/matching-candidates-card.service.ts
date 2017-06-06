@@ -14,7 +14,11 @@ interface Availability {
 export class MatchingCandidatesCardService {
   private subject: EventEmitter<Availability[]> = new EventEmitter();
 
-  constructor(private bridge: AppBridge, private shared: SharedService, private http: Http) { }
+  constructor(private bridge: AppBridge, private shared: SharedService, private http: Http) {
+    this.bridge.addEventListener('AVAILABILITY.CHANGED', () => {
+      this.refresh();
+    });
+  }
 
   getMatchingCandidates(): EventEmitter<any[]> {
     this.refresh();

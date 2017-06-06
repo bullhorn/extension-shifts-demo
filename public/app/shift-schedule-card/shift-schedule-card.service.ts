@@ -82,6 +82,7 @@ export class ShiftScheduleCardService {
         date1: evt.start.setUTCHours(12, 0, 0, 0)
       }]
     }).then(() => this.refresh());
+    this.bridge.fireEvent('SHIFTS.CHANGED', null);
   }
 
   update(evt: CalendarEvent | any) {
@@ -101,5 +102,6 @@ export class ShiftScheduleCardService {
     const params: any = new URLSearchParams(window.location.search).paramsMap;
     const entityId = params.get('EntityID')[0];
     this.bridge.httpDELETE(`/entity/JobOrder/${entityId}/customObject1s/${evt.id}`).then(() => this.refresh());
+    this.bridge.fireEvent('SHIFTS.CHANGED', null);
   }
 }
