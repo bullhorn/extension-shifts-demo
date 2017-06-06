@@ -15,7 +15,7 @@ export class MatchingJobsCardService {
   private subject: EventEmitter<Shift[]> = new EventEmitter();
 
   constructor(private bridge: AppBridge, private shared: SharedService, private http: Http) {
-    this.bridge.addEventListener('SHIFTS.CHANGED', () => {
+    this.bridge.addEventListener('AVAILABILITY.CHANGED', () => {
       this.refresh();
     });
   }
