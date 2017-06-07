@@ -1,5 +1,5 @@
-import { AppBridge, NgZone } from 'novo-elements';
-import { Component, OnInit } from '@angular/core';
+import { AppBridge } from 'novo-elements';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { MatchingCandidatesCardService } from './matching-candidates-card.service';
 
 @Component({
