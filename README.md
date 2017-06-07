@@ -1,2 +1,3 @@
-# engage-shifts-demo
-A sample project to add shift and availability to bullhorn using the StarterKit
+# Extension Sample - Shifts/Availability
+
+> A sample extension for Bullhorn 2017 that adds custom cards/tabs/objects/fieldmaps for Shifts/Availability
