@@ -82,7 +82,7 @@ export class MatchingCandidatesCardService {
     })
       .then((submission) => {
         console.log('submission', submission);
-        return this.http.post('./email/notification', submission.data).toPromise();
+        return this.http.post('./email/notification', submission).toPromise();
       })
       .then(() => {
         this.refresh();
