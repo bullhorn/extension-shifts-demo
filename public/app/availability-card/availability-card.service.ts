@@ -81,8 +81,10 @@ export class AvailabilityCardService {
         text2: evt.response,
         date1: evt.start.setUTCHours(12, 0, 0, 0)
       }]
-    }).then(() => this.refresh());
-    this.bridge.fireEvent('AVAILABILITY.CHANGED', null);
+    }).then(() => {
+      this.refresh();
+      this.bridge.fireEvent('AVAILABILITY.CHANGED', null);
+    });
   }
 
   update(evt: CalendarEvent | any) {
@@ -95,13 +97,18 @@ export class AvailabilityCardService {
         text1: evt.title,
         text2: evt.response
       }]
-    }).then(() => this.refresh());
+    }).then(() => {
+      this.refresh();
+      this.bridge.fireEvent('AVAILABILITY.CHANGED', null);
+    });
   }
 
   remove(evt: CalendarEvent | any) {
     const params: any = new URLSearchParams(window.location.search).paramsMap;
     const entityId = params.get('EntityID')[0];
-    this.bridge.httpDELETE(`/entity/Candidate/${entityId}/customObject1s/${evt.id}`).then(() => this.refresh());
-    this.bridge.fireEvent('AVAILABILITY.CHANGED', null);
+    this.bridge.httpDELETE(`/entity/Candidate/${entityId}/customObject1s/${evt.id}`).then(() => {
+      this.refresh();
+      this.bridge.fireEvent('AVAILABILITY.CHANGED', null);
+    });
   }
 }
