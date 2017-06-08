@@ -105,6 +105,7 @@ export class AutoMatchTabComponent implements OnInit {
       this.interested.rows.addItem(record);
       this.notified.rows.removeItem(record);
     }
+    this.service.interests(selected);
   }
 
   confirm(selected) {
@@ -112,8 +113,8 @@ export class AutoMatchTabComponent implements OnInit {
       record.status = 'Confirmed';
       this.confirmed.rows.addItem(record);
       this.interested.rows.removeItem(record);
-      this.service.confirm(selected);
     }
+    this.service.confirm(selected);
   }
 
   reject(selected) {

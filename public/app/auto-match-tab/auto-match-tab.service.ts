@@ -101,6 +101,27 @@ export class AutoMatchTabService {
       });
   }
 
+  interests(submissions: any[]) {
+    this.shared.getJobOrder().then((jobOrder) => {
+      const promises: Array<Promise<any>> = [];
+      for (const item of submissions) {
+        try {
+          console.log(item);
+          promises.push(
+            this.bridge.httpPOST(`/entity/JobSubmission/${item.submission}`, { status: 'Interested' }),
+          );
+        } catch (err) {
+          console.log('Invalid Action Attempted!!');
+        }
+      }
+      return Promise.all(promises);
+    })
+      .then(() => {
+        this.refreshNotified();
+        this.refreshInterested();
+      });
+  }
+
   confirm(submissions: any[]) {
     this.shared.getJobOrder().then((jobOrder) => {
       const placements: Array<Promise<any>> = [];

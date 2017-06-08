@@ -27,7 +27,7 @@ export class MatchingJobsCardService {
     const entityId = params.get('EntityID')[0];
     // TODO: Don't forget to set a date range.
     Promise.all([
-      this.bridge.httpGET(`/entity/Candidate/${entityId}/customObject1s?fields=id,text2,date1&count=500&where=date1>${Date.now()}`),
+      this.bridge.httpGET(`/entity/Candidate/${entityId}/customObject1s?fields=id,text2,date1&count=500&where=date1>${Date.now()} AND text2='1'`),
       this.bridge.httpGET(`/entity/Candidate/${entityId}/submissions?fields=id,candidate,customText5&count=500&where=customText5>'${Date.now()}'`)
     ]).then(([candidates, submissions]) => {
       console.log('C', candidates);

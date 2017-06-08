@@ -9,7 +9,7 @@
     <section>
       <novo-table [dataProvider]="notified.rows" [columns]="notified.columns" [config]="config" #messaged>
         <novo-table-actions *ngIf="messaged.selected.length">
-          <button theme="dialogue" icon="bell" (click)="remind(messaged.selected)">Reminder</button>
+          <button theme="dialogue" icon="bell" (click)="remind(messaged.selected)">Interested</button>
         </novo-table-actions>
       </novo-table>
     </section>
